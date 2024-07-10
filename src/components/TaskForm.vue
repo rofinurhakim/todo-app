@@ -1,15 +1,39 @@
 <template>
-  <div>
-    <h2>Add Task</h2>
-    <form @submit.prevent="addTask">
-      <input v-model="title" placeholder="Task title" required />
-      <input type="date" v-model="dueDate" required />
-      <select v-model="priority">
-        <option>Low</option>
-        <option>Medium</option>
-        <option>High</option>
-      </select>
-      <button type="submit">Add Task</button>
+  <div class="container mt-4">
+    <h2 class="mb-4">Add Task</h2>
+    <form @submit.prevent="addTask" class="needs-validation" novalidate>
+      <div class="form-group mb-3">
+        <label for="title">Task Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          v-model="title"
+          placeholder="Enter task title"
+          required
+        />
+        <div class="invalid-feedback">Please provide a task title.</div>
+      </div>
+      <div class="form-group mb-3">
+        <label for="dueDate">Due Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="dueDate"
+          v-model="dueDate"
+          required
+        />
+        <div class="invalid-feedback">Please select a due date.</div>
+      </div>
+      <div class="form-group mb-3">
+        <label for="priority">Priority</label>
+        <select class="form-control" id="priority" v-model="priority">
+          <option>Low</option>
+          <option>Medium</option>
+          <option>High</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Task</button>
     </form>
   </div>
 </template>
