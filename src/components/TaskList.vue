@@ -1,8 +1,17 @@
 <template>
   <div class="container mt-4">
     <h2 class="mb-4">Task List</h2>
+    <input
+      type="text"
+      class="form-control mb-4"
+      placeholder="Search tasks..."
+      v-model="searchQuery"
+    />
     <div class="row">
-      <div class="col-md-4 mb-4" v-for="task in tasks" :key="task.id">
+      <div v-if="filteredTasks.length === 0" class="col-12">
+        <p class="text-center">No tasks found.</p>
+      </div>
+      <div class="col-md-4 mb-4" v-for="task in filteredTasks" :key="task.id">
         <div class="card h-100">
           <img
             src="https://via.placeholder.com/150"
@@ -34,9 +43,23 @@
 
 <script>
 export default {
+  data() {
+    return {
+      searchQuery: "",
+    };
+  },
   computed: {
     tasks() {
       return this.$store.getters.tasks;
+    },
+    filteredTasks() {
+      const query = this.searchQuery.toLowerCase();
+      return this.tasks.filter(
+        (task) =>
+          task.title.toLowerCase().includes(query) ||
+          task.dueDate.toLowerCase().includes(query) ||
+          task.priority.toLowerCase().includes(query)
+      );
     },
   },
   methods: {

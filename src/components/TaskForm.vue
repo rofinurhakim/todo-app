@@ -1,40 +1,43 @@
 <template>
-  <div class="container mt-4">
-    <h2 class="mb-4">Add Task</h2>
-    <form @submit.prevent="addTask" class="needs-validation" novalidate>
-      <div class="form-group mb-3">
-        <label for="title">Task Title</label>
-        <input
-          type="text"
-          class="form-control"
-          id="title"
-          v-model="title"
-          placeholder="Enter task title"
-          required
-        />
-        <div class="invalid-feedback">Please provide a task title.</div>
+  <div class="bg-img">
+    <div class="w-50 m-auto m-form">
+      <div class="card around p-4 mb-4">
+        <form @submit.prevent="addTask" class="needs-validation" novalidate>
+          <div class="form-group mb-3">
+            <label for="title">Task Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              v-model="title"
+              placeholder="Enter task title"
+              required
+            />
+            <div class="invalid-feedback">Please provide a task title.</div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="dueDate">Due Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="dueDate"
+              v-model="dueDate"
+              required
+            />
+            <div class="invalid-feedback">Please select a due date.</div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="priority">Priority</label>
+            <select class="form-control" id="priority" v-model="priority">
+              <option>Low</option>
+              <option>Medium</option>
+              <option>High</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Add Task</button>
+        </form>
       </div>
-      <div class="form-group mb-3">
-        <label for="dueDate">Due Date</label>
-        <input
-          type="date"
-          class="form-control"
-          id="dueDate"
-          v-model="dueDate"
-          required
-        />
-        <div class="invalid-feedback">Please select a due date.</div>
-      </div>
-      <div class="form-group mb-3">
-        <label for="priority">Priority</label>
-        <select class="form-control" id="priority" v-model="priority">
-          <option>Low</option>
-          <option>Medium</option>
-          <option>High</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary">Add Task</button>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -63,3 +66,12 @@ export default {
   },
 };
 </script>
+
+<style>
+.bg-img {
+  background: url("https://c4.wallpaperflare.com/wallpaper/380/523/681/design-neon-abstract-light-design-hd-wallpaper-preview.jpg");
+}
+.m-form {
+  padding-top: 112px;
+}
+</style>

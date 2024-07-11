@@ -1,6 +1,9 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg bg-success">
+    <nav
+      class="navbar navbar-expand-lg fixed-top"
+      :class="{ 'navbar-scroll': scrolled }"
+    >
       <div class="container-fluid">
         <a class="navbar-brand fw-bold text-white" href="#">CAR-FRIEND</a>
         <button
@@ -65,5 +68,34 @@
 <script>
 export default {
   name: "AppNavbar",
+  data() {
+    return {
+      scrolled: false,
+    };
+  },
+  methods: {
+    handleScroll() {
+      this.scrolled = window.scrollY > 50;
+    },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
 };
 </script>
+
+<style scoped>
+.navbar {
+  transition: background-color 0.5s ease;
+  background-color: transparent;
+  background-size: cover;
+  color: white;
+}
+
+.navbar-scroll {
+  background: black; /* Background color when scrolled */
+}
+</style>
