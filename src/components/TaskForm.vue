@@ -70,6 +70,7 @@ export default {
 <style>
 .bg-img {
   background: url("https://c4.wallpaperflare.com/wallpaper/380/523/681/design-neon-abstract-light-design-hd-wallpaper-preview.jpg");
+  height: 500px;
 }
 .m-form {
   padding-top: 112px;

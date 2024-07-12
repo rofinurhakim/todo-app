@@ -5,7 +5,9 @@
       :class="{ 'navbar-scroll': scrolled }"
     >
       <div class="container-fluid">
-        <a class="navbar-brand fw-bold text-white" href="#">CAR-FRIEND</a>
+        <a class="navbar-brand fw-bold text-white" href="#">
+         CAR-FRIEND
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -48,17 +50,12 @@
               <a class="nav-link disabled">Disabled</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
+          <div class="d-flex align-items-center">
+            <span class="navbar-text text-white me-3">{{ username }}</span>
+            <button @click="logout" class="btn btn-link text-white">
+              <i class="bi bi-door-closed"></i>
             </button>
-          </form>
+          </div>
         </div>
       </div>
     </nav>
@@ -73,9 +70,18 @@ export default {
       scrolled: false,
     };
   },
+  computed: {
+    username() {
+      return this.$store.getters.user?.username || "Guest";
+    },
+  },
   methods: {
     handleScroll() {
       this.scrolled = window.scrollY > 50;
+    },
+    logout() {
+      this.$store.dispatch("logout");
+      this.$router.push("/login");
     },
   },
   mounted() {
@@ -97,5 +103,20 @@ export default {
 
 .navbar-scroll {
   background: black; /* Background color when scrolled */
+}
+
+.logo {
+  height: 30px;
+  margin-right: 10px;
+}
+
+.btn-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+.btn-link:hover {
+  color: #f8f9fa;
 }
 </style>

@@ -1,14 +1,27 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import tasksData from "@/data/tasks.json"; // Assuming tasks.json is located in the src/data folder
+import tasksData from "@/data/tasks.json";
+import usersData from "@/data/users.json";
 
 Vue.use(Vuex);
+
+const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
 
 export default new Vuex.Store({
   state: {
     tasks: tasksData,
+    users: usersData,
+    user: userFromLocalStorage || null,
   },
   mutations: {
+    setUser(state, user) {
+      state.user = user;
+      localStorage.setItem("user", JSON.stringify(user));
+    },
+    logout(state) {
+      state.user = null;
+      localStorage.removeItem("user");
+    },
     addTask(state, task) {
       state.tasks.push(task);
     },
@@ -23,6 +36,19 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    login({ commit, state }, { username, password }) {
+      const user = state.users.find(
+        (user) => user.username === username && user.password === password
+      );
+      if (user) {
+        commit("setUser", user);
+      } else {
+        throw new Error("Invalid username or password");
+      }
+    },
+    logout({ commit }) {
+      commit("logout");
+    },
     addTask({ commit }, task) {
       commit("addTask", task);
     },
@@ -36,5 +62,8 @@ export default new Vuex.Store({
   getters: {
     tasks: (state) => state.tasks,
     taskById: (state) => (id) => state.tasks.find((task) => task.id === id),
+    users: (state) => state.users,
+    user: (state) => state.user,
+    isAuthenticated: (state) => !!state.user,
   },
 });
