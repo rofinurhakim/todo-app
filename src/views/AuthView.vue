@@ -79,19 +79,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.login-container {
-  min-height: 100vh;
-}
-
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
-
-.card {
-  border: none;
-  border-radius: 10px;
-}
-</style>

@@ -1,12 +1,18 @@
 <template>
   <div class="container mt-4">
-    <h2 class="mb-4">Task List</h2>
     <input
       type="text"
       class="form-control mb-4"
       placeholder="Search tasks..."
       v-model="searchQuery"
     />
+
+    <div class="text-center" v-if="loading">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
     <div class="row">
       <div v-if="filteredTasks.length === 0" class="col-12">
         <p class="text-center">No tasks found.</p>
@@ -14,27 +20,30 @@
       <div class="col-md-4 mb-4" v-for="task in paginatedTasks" :key="task.id">
         <div class="card h-100">
           <img
-            src="https://via.placeholder.com/150"
+            src="https://img.freepik.com/free-vector/white-hatchback-car-isolated-white-vector_53876-67409.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1720656000&semt=ais_user"
             class="card-img-top"
             alt="Task Image"
           />
           <div class="card-body">
             <h5 class="card-title">
-              <router-link :to="'/task/' + task.id">{{
+              <router-link :to="'/task/' + task.id + '/detail'">{{
                 task.title
               }}</router-link>
             </h5>
             <p class="card-text">{{ task.dueDate }}</p>
             <p class="card-text">{{ task.priority }}</p>
-            <div class="d-flex justify-content-between">
-              <button class="btn btn-primary" @click="editTask(task.id)">
-                Edit
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-primary me-2" @click="viewTask(task.id)">
+                <i class="fas fa-eye"></i> View
+              </button>
+              <button class="btn btn-success me-2" @click="editTask(task.id)">
+                <i class="fas fa-edit"></i> Edit
               </button>
               <button
                 class="btn btn-danger"
                 @click="confirmDeleteTask(task.id)"
               >
-                Delete
+                <i class="fas fa-trash-alt"></i> Delete
               </button>
             </div>
           </div>
@@ -84,6 +93,7 @@ export default {
       searchQuery: "",
       currentPage: 1,
       tasksPerPage: 6,
+      loading: false, // Add loading state
     };
   },
   computed: {
@@ -109,8 +119,11 @@ export default {
     },
   },
   methods: {
+    viewTask(taskId) {
+      this.$router.push(`/task/${taskId}/detail`);
+    },
     editTask(taskId) {
-      this.$router.push(`/edit-task/${taskId}`);
+      this.$router.push(`/task/${taskId}/edit`);
     },
     confirmDeleteTask(taskId) {
       Swal.fire({
@@ -136,17 +149,15 @@ export default {
         this.currentPage = page;
       }
     },
+    fetchData() {
+      this.loading = true;
+      setTimeout(() => {
+        this.loading = false;
+      }, 1000);
+    },
+  },
+  created() {
+    this.fetchData();
   },
 };
 </script>
-
-<style scoped>
-.card-title a {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-}
-.card-title a:hover {
-  color: #007bff;
-}
-</style>

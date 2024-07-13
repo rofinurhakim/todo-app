@@ -61,7 +61,11 @@ export default new Vuex.Store({
   },
   getters: {
     tasks: (state) => state.tasks,
-    taskById: (state) => (id) => state.tasks.find((task) => task.id === id),
+    taskById: (state) => (id) => {
+      const taskId = typeof id === "string" ? parseInt(id, 10) : id;
+      const task = state.tasks.find((task) => task.id === taskId);
+      return task;
+    },
     users: (state) => state.users,
     user: (state) => state.user,
     isAuthenticated: (state) => !!state.user,

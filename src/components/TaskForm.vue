@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-img">
-    <div class="w-50 m-auto m-form">
-      <div class="card around p-4 mb-4">
+  <div class="container mt-4">
+    <div class="m-form">
+      <div class="card shadow p-3 mb-5 bg-body rounded p-4">
         <form @submit.prevent="addTask" class="needs-validation" novalidate>
           <div class="form-group mb-3">
             <label for="title">Task Title</label>
@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
+
 export default {
   data() {
     return {
@@ -62,17 +64,15 @@ export default {
       this.title = "";
       this.dueDate = "";
       this.priority = "Medium";
+
+      Swal.fire({
+        icon: "success",
+        title: "Task Added!",
+        text: "Your task has been successfully added.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     },
   },
 };
 </script>
-
-<style>
-.bg-img {
-  background: url("https://c4.wallpaperflare.com/wallpaper/380/523/681/design-neon-abstract-light-design-hd-wallpaper-preview.jpg");
-  height: 500px;
-}
-.m-form {
-  padding-top: 112px;
-}
-</style>

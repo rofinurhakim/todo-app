@@ -1,7 +1,13 @@
 <template>
-  <div>
-    <TaskForm />
-    <TaskList />
+  <div class="container-fluid bg-light">
+    <div class="row">
+      <div class="col-lg-3 col-md-12 mb-4">
+        <TaskForm />
+      </div>
+      <div class="col-lg-9 col-md-12 mb-4">
+        <TaskList />
+      </div>
+    </div>
   </div>
 </template>
 

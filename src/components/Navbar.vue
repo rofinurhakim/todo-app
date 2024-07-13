@@ -1,13 +1,11 @@
 <template>
   <div>
     <nav
-      class="navbar navbar-expand-lg fixed-top"
+      class="navbar navbar-expand-lg bg-dark"
       :class="{ 'navbar-scroll': scrolled }"
     >
       <div class="container-fluid">
-        <a class="navbar-brand fw-bold text-white" href="#">
-         CAR-FRIEND
-        </a>
+        <a class="navbar-brand fw-bold text-white" href="/"> CAR-FRIEND </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -22,40 +20,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+              <a class="nav-link active text-white" aria-current="page" href="/"
+                >Home</a
               >
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled">Disabled</a>
             </li>
           </ul>
-          <div class="d-flex align-items-center">
-            <span class="navbar-text text-white me-3">{{ username }}</span>
-            <button @click="logout" class="btn btn-link text-white">
-              <i class="bi bi-door-closed"></i>
-            </button>
-          </div>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item d-flex align-items-center">
+              <span class="navbar-text me-3 text-white border-end pe-3">{{
+                username
+              }}</span>
+              <button class="btn btn-link text-white" @click="logout">
+                <i class="fas fa-sign-out-alt"></i>
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -92,31 +71,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.navbar {
-  transition: background-color 0.5s ease;
-  background-color: transparent;
-  background-size: cover;
-  color: white;
-}
-
-.navbar-scroll {
-  background: black; /* Background color when scrolled */
-}
-
-.logo {
-  height: 30px;
-  margin-right: 10px;
-}
-
-.btn-link {
-  color: white;
-  text-decoration: none;
-  font-size: 1.5rem;
-}
-
-.btn-link:hover {
-  color: #f8f9fa;
-}
-</style>
