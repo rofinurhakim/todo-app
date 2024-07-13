@@ -19,3 +19,7 @@
   button{
     cursor: pointer;
   }
+
+  .login-container {
+    min-height: 100vh;
+  }
